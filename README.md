@@ -1,5 +1,7 @@
 # Unity Mesh Editor Tool
 
+### Note: This tool is still a work in progress. Please backup any meshes before utilizing the tool.
+
 A Unity Editor Window tool that allows you to select and remove faces of a mesh. This tool provides a graphical interface in the Unity Editor for selecting faces by clicking on them in the Scene view and saving the modified mesh as a new asset.
 
 ## Features
