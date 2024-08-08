@@ -1,7 +1,5 @@
 # Unity Mesh Editor Tool
 
-### Note: This tool is still a work in progress. Please backup any meshes before utilizing the tool.
-
 A Unity Editor Window tool that allows you to select and remove faces of a mesh. This tool provides a graphical interface in the Unity Editor for selecting faces by clicking on them in the Scene view and saving the modified mesh as a new asset.
 
 ## Features
@@ -10,6 +8,7 @@ A Unity Editor Window tool that allows you to select and remove faces of a mesh.
 - Hold `Ctrl` and click to select all connected faces.
 - Highlight selected faces in the Scene view.
 - Remove selected faces from the mesh.
+- Option to remove everything except the selected faces.
 - Save the modified mesh as a new asset.
 
 ## Usage
@@ -27,10 +26,13 @@ A Unity Editor Window tool that allows you to select and remove faces of a mesh.
    - Hold `Ctrl` and click on a face to select all connected faces.
    - Selected faces will be highlighted in the Scene view.
 
-4. **Remove Faces**:
-   - Click the `Remove Selected Faces` button to remove the selected faces.
+4. **Choose Removal Mode**:
+   - Toggle the "Keep Only Selected Faces" option to switch between removing selected faces and keeping only the selected faces.
 
-5. **Save the Mesh**:
+5. **Apply Changes**:
+   - Click the `Apply Changes` button to either remove selected faces or keep only the selected faces based on the toggle.
+
+6. **Save the Mesh**:
    - Click the `Save New Mesh` button to save the modified mesh as a new asset.
 
 ## License
