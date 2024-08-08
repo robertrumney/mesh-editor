@@ -9,6 +9,7 @@ public class MeshEditorWindow : EditorWindow
     private Mesh mesh;
     private HashSet<int> selectedFaces = new HashSet<int>();
     private bool ctrlHeld = false;
+    private bool keepSelectedFaces = false; // Toggle to switch between remove modes
 
     [MenuItem("Tools/Mesh Editor")]
     public static void ShowWindow()
@@ -41,9 +42,18 @@ public class MeshEditorWindow : EditorWindow
                 RefreshMesh();
             }
 
-            if (GUILayout.Button("Remove Selected Faces"))
+            keepSelectedFaces = EditorGUILayout.Toggle("Keep Only Selected Faces", keepSelectedFaces);
+
+            if (GUILayout.Button("Apply Changes"))
             {
-                RemoveSelectedFaces();
+                if (keepSelectedFaces)
+                {
+                    KeepOnlySelectedFaces();
+                }
+                else
+                {
+                    RemoveSelectedFaces();
+                }
             }
 
             if (GUILayout.Button("Save New Mesh"))
@@ -78,6 +88,25 @@ public class MeshEditorWindow : EditorWindow
 
         selectedFaces.Clear();
         Debug.Log("Selected faces removed.");
+    }
+
+    private void KeepOnlySelectedFaces()
+    {
+        List<int> newTriangles = new List<int>();
+
+        foreach (int i in selectedFaces)
+        {
+            newTriangles.Add(mesh.triangles[i * 3]);
+            newTriangles.Add(mesh.triangles[i * 3 + 1]);
+            newTriangles.Add(mesh.triangles[i * 3 + 2]);
+        }
+
+        mesh.triangles = newTriangles.ToArray();
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+
+        selectedFaces.Clear();
+        Debug.Log("Only selected faces kept.");
     }
 
     private void SaveNewMesh()
