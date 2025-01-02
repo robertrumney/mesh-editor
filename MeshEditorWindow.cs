@@ -7,9 +7,9 @@ public class MeshEditorWindow : EditorWindow
 {
     private MeshFilter meshFilter;
     private Mesh mesh;
-    private HashSet<int> selectedFaces = new HashSet<int>();
+    private readonly HashSet<int> selectedFaces = new HashSet<int>();
     private bool ctrlHeld = false;
-    private bool keepSelectedFaces = false; // Toggle to switch between remove modes
+    private bool keepSelectedFaces = false;
 
     [MenuItem("Tools/Mesh Editor")]
     public static void ShowWindow()
@@ -134,9 +134,8 @@ public class MeshEditorWindow : EditorWindow
         if (e.type == EventType.MouseDown && e.button == 0 && !e.alt)
         {
             Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 if (hit.transform == meshFilter.transform)
                 {
@@ -221,7 +220,6 @@ public class MeshEditorWindow : EditorWindow
     {
         List<int> connectedFaces = new List<int>();
         int[] triangles = mesh.triangles;
-        Vector3[] vertices = mesh.vertices;
 
         int[] currentTriangle = new int[]
         {
